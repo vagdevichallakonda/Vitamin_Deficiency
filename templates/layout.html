@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/img/favicon.png" rel="icon">
+  <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  
+  <style>
+    /* Dark Background and Enhanced Styles */
+    body {
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .header-transparent {
+      background-color: #1f1f1f;
+    }
+
+    h3, h4, label {
+      color: #ffcc00;
+    }
+
+    /* Icon Box Customization */
+    .icon-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .icon-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px rgba(255, 204, 0, 0.8);
+    }
+
+    /* Form Styling */
+    .img-form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255, 204, 0, 0.3);
+    }
+
+    .btn-file {
+      background-color: #ffcc00;
+      color: #000;
+      border-radius: 8px;
+    }
+
+    .btn-file:hover {
+      background-color: #ffd633;
+    }
+
+    #img-upload {
+      max-width: 100%;
+      border: 3px solid #ffcc00;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
+    /* Submit Button with Animation */
+    .btn-submit {
+      background-color: #ffcc00;
+      color: #000;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #e6b800;
+      transform: scale(1.05);
+    }
+
+    .input-group input,
+    .form-control {
+      background-color: #333;
+      color: #fff;
+      border: 2px solid #ffcc00;
+      border-radius: 8px;
+    }
+  </style>
+
+
+<!-- Vendor CSS Files -->
+  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Squadfree - v4.6.0
+  * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+<!-- ======= Top Bar ======= -->
+  
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-transparent">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="index.html"><span>Vitamin deficiency Classification</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{{ url_for('first')}}">Home</a></li>
+           
+          <li><a class="nav-link scrollto" href="{{ url_for('login')}}">Login</a></li>
+
+          <li><a class="nav-link scrollto" href="{{ url_for('index')}}">Prediction</a></li>
+
+
+          <li><a class="nav-link scrollto" href="{{ url_for('chart')}}">Analysis</a></li>
+
+		         
+        
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      
+
+    </div>
+  </header><!-- End Header -->
+
+
+   <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" data-aos="fade-up">
+      
+      <a href="#about" class="btn-get-started scrollto"></a>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+   <!-- ======= About Section ======= -->
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row no-gutters">
+      <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-up">
+        <div class="content">
+          <h3>Vitamin Deficiency Classification</h3>
+          <p>
+            Our system leverages deep learning techniques to accurately identify and classify vitamin deficiencies based on human tissue images.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-xl-7 d-flex align-items-stretch">
+        <div class="icon-boxes d-flex flex-column justify-content-center">
+          <div class="row">
+            <!-- Feature 1 -->
+            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+              <h4><i class="bi bi-brain"></i> Recurrent Neural Network</h4>
+              <p>Deep learning algorithms mimic brain processes to store and analyze data efficiently.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+              <h4><i class="bi bi-bar-chart-line"></i> 98% Accuracy</h4>
+              <p>Optimized hyperparameters including dropout rate and learning rate ensure high accuracy.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+              <h4><i class="bi bi-database"></i> 6000+ Clinical Data</h4>
+              <p>Large datasets are used to improve the evaluation of the system.</p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+              <h4><i class="bi bi-laptop"></i> Web Application</h4>
+              <p>Flask-based, interactive, and user-friendly web application.</p>
+            </div>
+          </div>
+        </div><!-- End .content-->
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- End About Section -->
+
+
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
+            });
+
+            $('.btn-file :file').on('fileselect', function (event, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+
+            });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#img-upload').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#imgInp").change(function () {
+                readURL(this);
+            });
+        });
+
+        function validateFileType(){
+            debugger;
+            var fileName = document.getElementById("imgInp").value;
+            var idxDot = fileName.lastIndexOf(".") + 1;
+            var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+            if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+            //TO DO
+            }else{
+            alert("Only jpg/jpeg and png files are allowed");
+            }
+            }
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- <div class="page-header format-header jumbotron">
+    <h2>Clustering</h2>
+  </div> -->
+        <div>
+         
+                {% block content %}
+                {% endblock content %}
+                
+                </div>
+                </div>
+
+                  
+
+  <!-- Vendor JS Files -->
+  <script src="../static/vendor/aos/aos.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/vendor/php-email-form/validate.js"></script>
+  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/js/main.js"></script>
+
+</body>
+
+</html>
+
+
+
+</body>
+
+</html>

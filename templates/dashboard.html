@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vita-Scan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        nav {
+            
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            height: 60px;
+            color: white;
+        }
+
+        nav h1 {
+            font-size: 1.5em;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #4a90e2;
+        }
+
+        .image {
+            background: url("/static/img/dashboard-bg.png") no-repeat center center fixed;
+            background-size: cover;
+            min-height: calc(100vh - 100px);
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 20px 20px 40px; /* to avoid overlap with navbar */
+            min-height: calc(100vh - 100px); 
+        }
+
+        .option-card {
+            background-color: rgba(60, 60, 60, 0.95);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            color: #eaeaea;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .option-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .option-card h2 {
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #555;
+            padding-bottom: 6px;
+        }
+
+        .option-card p {
+            font-size: 0.95em;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .option-card form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        button {
+            background-color: #4a90e2;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ab8;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        img, video {
+            max-width: 100%;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+        }
+
+        p#imageResponse,
+        p#videoResponse,
+        p#liveResponse {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1em;
+            background: #dceeff;
+            color: #222;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        footer {
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+            color: #ccc;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            border-top: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>Vita-Scan</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/dashboard">Prediction</a></li>
+        </ul>
+    </nav>
+    <div class="image">
+    
+    <div class="container">
+        <!-- Image Upload -->
+        <div class="option-card">
+            <h2>Image Upload</h2>
+            <form id="imageUploadForm" enctype="multipart/form-data">
+                <input type="file" id="imageInput" name="file" accept="image/*" required>
+                <button type="button" onclick="document.getElementById('imageInput').click();">Choose Image</button>
+                <button type="submit">Upload</button>
+            </form>
+            <div>
+                <img id="previewImage" style="display: none;">
+            </div>
+            <p id="imageResponse"></p>
+        </div>
+
+        <!-- Video Upload -->
+        <div class="option-card">
+            <h2>Video Upload</h2>
+            <form id="videoUploadForm" enctype="multipart/form-data">
+                <input type="file" id="videoInput" name="file" accept="video/*" required>
+                <button type="button" onclick="document.getElementById('videoInput').click();">Choose Video</button>
+                <button type="submit">Upload</button>
+            </form>
+            <div>
+                <video id="previewVideo" controls style="display: none;"></video>
+            </div>
+            <p id="videoResponse"></p>
+        </div>
+
+        <!-- Live Capture -->
+        <div class="option-card">
+            <h2>Live Capture</h2>
+            <p>Record a 10-second video for analysis</p>
+            <button onclick="startRecording()">Start Recording</button>
+            <video id="livePreview" autoplay muted style="display: none;"></video>
+            <button id="uploadLiveButton" style="display:none">Upload Recorded Video</button>
+            <p id="liveResponse"></p>
+        </div>
+    </div>
+</div>
+
+    <footer>
+        <p>✨ Stay healthy, stay glowing! Your vitamins matter. ❤️</p>
+    </footer>
+
+    <script>
+        // Image Preview
+        document.getElementById("imageInput").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById("previewImage");
+                    img.src = e.target.result;
+                    img.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Image Upload
+        document.getElementById("imageUploadForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const file = document.getElementById("imageInput").files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const res = await fetch("/upload_image", { method: "POST", body: formData });
+            const result = await res.text();
+            document.getElementById("imageResponse").innerText = result;
+        });
+
+        // Video Preview
+        document.getElementById("videoInput").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            const url = URL.createObjectURL(file);
+            const video = document.getElementById("previewVideo");
+            video.src = url;
+            video.style.display = "block";
+        });
+
+        // Video Upload
+        document.getElementById("videoUploadForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const file = document.getElementById("videoInput").files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const res = await fetch("/upload_video", { method: "POST", body: formData });
+            const result = await res.text();
+            document.getElementById("videoResponse").innerText = result;
+        });
+
+        // Live Recording
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        async function startRecording() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            const video = document.getElementById("livePreview");
+            video.srcObject = stream;
+            video.style.display = "block";
+
+            recordedChunks = [];
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = e => recordedChunks.push(e.data);
+            mediaRecorder.onstop = async () => {
+                const blob = new Blob(recordedChunks, { type: "video/webm" });
+                const formData = new FormData();
+                formData.append("file", blob, "live_capture.webm");
+
+                const uploadBtn = document.getElementById("uploadLiveButton");
+                uploadBtn.style.display = "inline-block";
+                uploadBtn.onclick = async () => {
+                    const res = await fetch("/record_video", { method: "POST", body: formData });
+                    const result = await res.text();
+                    document.getElementById("liveResponse").innerText = result;
+                };
+            }; 
+
+            mediaRecorder.start();
+            setTimeout(() => {
+                mediaRecorder.stop();
+                stream.getTracks().forEach(track => track.stop());
+            }, 10000); // 10 seconds
+        }
+    </script>
+
+</body>
+</html>
