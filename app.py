@@ -8,7 +8,8 @@ from video_detect import detect_best_face
 from record_video import record
 
 app = Flask(__name__)
-UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'img')
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'images')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 VITAMIN_INFO = {
@@ -21,7 +22,7 @@ VITAMIN_INFO = {
 
 # ------------------------- Helper Functions -------------------------
 def save_img(img, filename):
-    path = os.path.join('static/images', filename)
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     Image.open(img).save(path)
     return path
 
@@ -32,7 +33,7 @@ def process(image_path):
     try:
         print("[INFO] Performing image clustering...")
         fem.plot_cluster_img(image_path, 3)
-        clustered_path = 'static/images/orig_image.jpg'
+        clustered_path = os.path.join(app.config['UPLOAD_FOLDER'], 'orig_image.jpg')
         result = load_image(clustered_path)
         return result.title() if result else "Prediction failed"
     except Exception as e:
@@ -129,6 +130,5 @@ def process_detected_face(detected_path):
 
 # ------------------------- Main -------------------------
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get("PORT", 5000))  # Required for Render.com or similar platforms
+    port = int(os.environ.get("PORT", 5000))  # For Render.com or cloud platforms
     app.run(host='0.0.0.0', port=port)
