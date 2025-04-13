@@ -9,3 +9,4 @@ pillow==10.2.0
 werkzeug==2.3.6
 gunicorn==21.2.0
 imageio==2.33.1
+ultralytics==8.0.192
