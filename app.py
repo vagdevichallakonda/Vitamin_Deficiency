@@ -19,17 +19,14 @@ VITAMIN_INFO = {
     "Vitamin E": " → Needs fat for the digestive system to absorb it. Deficiency can cause nerve and muscle damage, weakness, and vision problems..."
 }
 
-
 # ------------------------- Helper Functions -------------------------
 def save_img(img, filename):
     path = os.path.join('static/images', filename)
     Image.open(img).save(path)
     return path
 
-
 def load_image(image_path):
     return label_image.main(image_path)
-
 
 def process(image_path):
     try:
@@ -42,10 +39,8 @@ def process(image_path):
         print(f"[ERROR] Image processing failed: {e}")
         return "Prediction failed"
 
-
 def append_info(result):
     return result + VITAMIN_INFO.get(result, " → No additional details found.")
-
 
 def handle_result(result, image_path):
     if not result or result == "Prediction failed":
@@ -59,28 +54,23 @@ def handle_result(result, image_path):
 
     return result
 
-
 # ------------------------- Routes -------------------------
 @app.route('/')
 @app.route('/first')
 def first():
     return render_template('first.html')
 
-
 @app.route('/login')
 def login():
     return render_template('login.html')
-
 
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html')
 
-
 @app.route('/upload')
 def upload():
     return render_template('index1.html')
-
 
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
@@ -97,7 +87,6 @@ def upload_image():
     except Exception as e:
         print(f"[ERROR] /upload_image failed: {e}")
         return jsonify({'error': str(e)}), 500
-
 
 @app.route('/upload_video', methods=['POST'])
 def upload_video_route():
@@ -118,7 +107,6 @@ def upload_video_route():
         print(f"[ERROR] /upload_video failed: {e}")
         return jsonify({'error': str(e)}), 500
 
-
 @app.route('/record_video', methods=['GET', 'POST'])
 def record_video_route():
     try:
@@ -131,7 +119,6 @@ def record_video_route():
         print(f"[ERROR] /record_video failed: {e}")
         return jsonify({'error': str(e)}), 500
 
-
 # ------------------------- Utility Handler -------------------------
 def process_detected_face(detected_path):
     if not detected_path or not os.path.exists(detected_path):
@@ -140,9 +127,8 @@ def process_detected_face(detected_path):
     result = process(detected_path)
     return handle_result(result, detected_path)
 
-
 # ------------------------- Main -------------------------
 if __name__ == '__main__':
-    import webbrowser
-    webbrowser.open('http://127.0.0.1:5000')
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))  # Required for Render.com or similar platforms
+    app.run(host='0.0.0.0', port=port)
